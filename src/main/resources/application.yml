@@ -1,0 +1,27 @@
+spring:
+  config:
+    import: classpath:.env.properties
+  mail:
+    host: smtp.${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+    sender:
+      email: ${MAIL_USERNAME}@${MAIL_HOST}
+
+server:
+  port: 8082
+
+actuator:
+  servers:
+    MATER:
+      url: http://${VIRTUAL_PRIVATE_CLOUD_PUBLIC_IP}:8081/actuator/health
+      up: false
+
